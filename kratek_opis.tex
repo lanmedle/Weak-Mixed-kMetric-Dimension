@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[slovene]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[a4paper, margin = 3cm]{geometry}
+\usepackage{amsfonts}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Def.}
+\newtheorem{theorem}{Izrek}
+\newtheorem{lemma}{Lema}
+\newtheorem{corollary}{Posledica}
+\newtheorem{example}{Primer}
+\newtheorem{remark}{Opomba}
+\newtheorem{proposition}{Trditev}
+
+\author{Lan Medle, Nina Švigelj}
+\title{Šibke mešane $k$-metrične dimenzije}
+
+\begin{document}
+\maketitle
+
+\section{Opis problema}
+Pravimo, da vozlišče $s$ razreši par vozlišč $x,y$ v grafu $G$, če velja: $$d(s,x) \neq d(s,y).$$
+Množica vozlišč S je razrešitev za vsak graf $G$, če vsak par vozlišč $x,y$ v $G$ razrešuje neko vozlišče $s \in S.$
+
+(Vozliščna) metrična dimenzija povezanega grafa $G$, označena kot $dim(G)$, je velikost najmanjše množice $S\subseteq V(G)$, ki razlikuje vse pare vozlišč v $G$.
+
+Midva bova preučevala mešano metrično dimenzijo, kjer v grafu razrešujemo tako robove kot točke, kar pomeni, da želimo razlikovati vsak par točk, vsak par robov in vsako točko od vsakega roba. Označena z $mdim(G)$, je velikost najmanjše množice $S \subseteq V(G)$, ki razlikuje vse pare točk in robov.
+
+Naj bo $S \subseteq V(G)$ in $a,b \in V(G) \cup E(G)$. Definiramo $\Delta_S (a,b)$ kot vsoto razlik razdalj od $a$ in $b$ do vsakega vozlišča iz $S$, torej $$\Delta_S(a,b) = \sum_{s\in S} |d(s,a) - d(s,b)|.$$
+
+Označimo $\Delta_{V(G)} (a,b) = \Delta(a,b)$.
+
+Šibka mešana $k$-jmetrična dimenzija $wmdim_k(G)$ grafa $G$ je definirana kot moč najmanjše mnoice vozlišč $S$, za katero velja, da za vsak par vozlišč ali povezav $a,b \in V(G) \cup E(G)$ velja $$\Delta_S(a,b) \ge k.$$
+
+Maksimalno vrednost $k$ za katero je definirana šibka mešana $k-$metrična dimenzija z $\kappa''(G).$
+
+
+\vspace{0.5cm}
+\noindent
+Najina naloga je napisati CLP program za različico naslova in v programu Sage napisati manjše podprograme, ki nama bodo pomagali odgovoriti na naslednja vprašanja:
+\begin{enumerate}
+    \item Določite $\kappa''(G)$ in $wmdim_k(G)$ za cikle, polne grafe, dvodelne polne grafe, hiperkocke in kartezične produkte ciklov, ter poskusite na podlagi izračunov uganiti možne formule.
+    \item Poskusite določiti grafe $G$ za katere je $wmdim_k(G)$ majhen, recimo 1,2 ali 3. Pravtako določite tudi grafe za katere je $wmdim_k(G)$ velik, recimo $n$, $n-1$ ali $n-2$, kjer je $n$ \textbf{red} grafa $G$ (\textit{kar je enako številu vozlišč v grafu}).
+\end{enumerate}
+Za manjše grafe poiščite $wmdim_k(G)$ z uporabo sistematičnega iskanja, za večje pa s stohastičnim iskanjem. Sestavite poročilo o svojih rezultatih.
+
+
+\section{Potek dela}
+
+\subsection*{Slovar tujk}
+\textbf{resolve} razrešiti
+
+
+\end{document}
