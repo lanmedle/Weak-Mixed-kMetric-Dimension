@@ -32,14 +32,15 @@ Midva bova preučevala mešano metrično dimenzijo, kjer v grafu razrešujemo ta
 
 Naj bo $S \subseteq V(G)$ in $a,b \in V(G) \cup E(G)$. Definiramo $\Delta_S (a,b)$ kot vsoto razlik razdalj od $a$ in $b$ do vsakega vozlišča iz $S$, torej $$\Delta_S(a,b) = \sum_{s\in S} |d(s,a) - d(s,b)|.$$
 
+\noindent
 Označimo $\Delta_{V(G)} (a,b) = \Delta(a,b)$.
 
-Šibka mešana $k$-jmetrična dimenzija $wmdim_k(G)$ grafa $G$ je definirana kot moč najmanjše mnoice vozlišč $S$, za katero velja, da za vsak par vozlišč ali povezav $a,b \in V(G) \cup E(G)$ velja $$\Delta_S(a,b) \ge k.$$
-
+Šibka mešana $k$-metrična dimenzija $wmdim_k(G)$ grafa $G$ je definirana kot moč najmanjše mnoice vozlišč $S$, za katero velja, da za vsak par vozlišč ali povezav $a,b \in V(G) \cup E(G)$ velja $$\Delta_S(a,b) \ge k.$$
+\noindent
 Maksimalno vrednost $k$ za katero je definirana šibka mešana $k-$metrična dimenzija z $\kappa''(G).$
 
 
-\vspace{0.5cm}
+\vspace{0.3cm}
 \noindent
 Najina naloga je napisati CLP program za različico naslova in v programu Sage napisati manjše podprograme, ki nama bodo pomagali odgovoriti na naslednja vprašanja:
 \begin{enumerate}
@@ -50,9 +51,16 @@ Za manjše grafe poiščite $wmdim_k(G)$ z uporabo sistematičnega iskanja, za v
 
 
 \section{Potek dela}
+\begin{enumerate}
+    \item Konstrukcija CLP za različne tipe grafov.
+    \item S pomočjo konstruiranih CLP poiščeva $\kappa''(G)$ in $wmdim_k(G)$ za specifične primere ter poskusiva uganiti splošno formulo za $\kappa''(G)$ in $wmdim_k(G)$.
+    \item Poskusila bova določiti grafe $G$ za katere je $wmdim_k(G)$ majhen oz. velik.
+    \item Napisala bova poročilo.
+\end{enumerate}
 
-\subsection*{Slovar tujk}
-\textbf{resolve} razrešiti
+
+% \subsection*{Slovar tujk}
+% \textbf{resolve} razrešiti
 
 
 \end{document}
