@@ -7,7 +7,7 @@ kartezične produkte ciklov. S pomočjo tega, sva poskusila uganit bolj splošne
 Nato sva s pomočjo sistematičnega in stohastičnega iskanja (hill-climbing in simulated annealing) iskala grafe za katere je $wmdim_k(G)$ velik oz. majhen.
 
 ## CLP program
-Kot že rečeno sva najprej morala napisati CLP program, ki bo vračal $wmdim_k(G)$. Ker mora najin program izračunati tudi razdalje med vozlišči in povezavami sva zato naprej definirala funkcijo razdalja, ki naredi prav to.
+Kot že rečeno sva najprej morala napisati CLP program, ki bo vračal $wmdim_k(G)$. Ker mora najin program izračunati tudi razdalje med vozlišči in povezavami sva zato naprej definirala funkcijo razdalja, ki naredi prav to. Funkcija `razdalja` sprejmetri argumente: `moznost`, `vozlisce` in `G`, kjer je moznost podana kot par `(c,a)`, kjer `c` pove ali imamo povezavo ali vozlišče, `a` pa je potem ta povezava oz. vozlišče, do katerega raučnamo razdaljo. Razdalja od vozlišča do povezave `UV` je definirana kot najkrajša razdalja od vozlišča `vozlisce` do `U` oz. `V`.
 ```py
 def razdalja(moznost, vozlisce, G):
     c, a = moznost
@@ -17,6 +17,9 @@ def razdalja(moznost, vozlisce, G):
     else:
         return G.distance(a, vozlisce)
 ```
+
+CLP program za šibko mešano k-metrično dimenzijo je zelo podobne CLP programu za šibko k-metrično dimenzijo s to izjemo, da moramo pri mešani upoštevati tudi vse povezave. To sva naredila tako, da sva definirala `moznosti` kot seznam povezav in vozlišč in vsako izmed njih poimenovala - da bo funkcija razdalja vedela, ali gre za vozlišče ali povezavo (problem bi drugače nastal pri kartezičnih produktih ciklov). Pri samem programu pa sva si pomagala z vgrajeno funkcijo `MixedIntegerLinearProgram` s katero sva potem dobila `wmdim_k` od grafa `G` za nek določen `k`.
+
 ```py
 def CLP_weak_mixed_k_dim(G, k):
     p = MixedIntegerLinearProgram(maximization=False)
@@ -39,7 +42,7 @@ def CLP_weak_mixed_k_dim(G, k):
 
     return (wmdim_k, mnozica_S)
 ```
-Sedaj nam za prvi del preostane samo še izračun $\kappa''(G)$
+Sedaj nam za prvi del preostane samo še izračun $\kappa''(G)$. Tega dobimo tako, da pogledamo do katerega `k` funkcija `CLP_weak_mixed_k_dim` ne dobi napake. Največji tak `k` je ravno $\kappa''(G)$.
 ```py
 def kappa_2_crti(G):
     k = 1
@@ -52,7 +55,9 @@ def kappa_2_crti(G):
 ```
 
 ## Ugotovitve
+Po poganjanju kode (glej datoteko _prva_naloga.ipynb_) sva prišla do naslednjih ugotovitev.
 ### Cikli
+
 $$\kappa''(G) = \Big\lfloor\frac{n}{2}\Big\rfloor$$
 $$wmdim_1(G) = 3$$
 $$wmdim_k(G) = \begin{cases}
@@ -65,7 +70,8 @@ $$\kappa''(G) = 1$$
 $$wmdim_1(G) = n$$
 
 ### Dvodelni polni grafi
-Za dvodelne polne grafe za katere je $m$ ali $n$ enak $1$, je $\kappa''(G)$ = 1, $wmdim_k(G)$ je tedaj enak $m\cdot n$. Izjema je dvodelni polni graf, kjer sta $m$ in $n$ enaka $1$, tedaj je $\kappa''(G) = 1, \ wmdim_k(G) = 2$, torej $m+n$. Za dvodelne polne grafe, za katere $m$ in $n$ nista enaka $1$, je $\kappa''(G) = 2$. $wmdim_k(G)$ je za $k=1$ enak $m+n-1$, če je $m$ ali $n$ enak $2$, v nasprotnem primeru pa je enak $m+n-2$. Za $k=2$ je $wmdim_k(G)$ enak $m+n$.
+- Za dvodelne polne grafe za katere je bil $m$ ali $n$ enak $1$, je $\kappa''(G) = 1$, $wmdim_k(G)$ je tedaj enak $m\cdot n$. Izjema je dvodelni polni graf, kjer sta $m$ in $n$ enaka $1$, tedaj je $\kappa''(G) = 1, \ wmdim_k(G) = 2$, torej $m+n$. 
+- Za dvodelne polne grafe, za katere $m$ in $n$ nista enaka $1$, je $\kappa''(G) = 2$. $wmdim_k(G)$ je za $k=1$ enak $m+n-1$, če je $m$ ali $n$ enak $2$, v nasprotnem primeru pa je enak $m+n-2$. Za $k=2$ je $wmdim_k(G)$ enak $m+n$.
 
 
 ### Hiperkocke
@@ -76,19 +82,17 @@ Za $wmdim_k(G)$ žal nisva našla vzorca.
 ### Kartezični produkti ciklov
 Pri kartezičnih produktih ciklov je za grafe s $k$-jem enakim $\kappa''(G)$ $$wmdim_k(G) = m\cdot n.$$
 
-Gledamo $\kappa''(G)$: imamo cikla C_m in C_n, velikosti $m$ in $n$.
-Če je $a = \max{m,n}$ sod: $$\begin{cases}
-(b//a + 1) \cdot a & b \ lih\\
-b//2 \cdot a& b\  sod
+Če gledamo kartezični produkt ciklov $C_m$ in $C_n$, velikosti $m$ in $n$ pa je $\kappa''(G)$ definiran s pomočjo: $a = \max\{m,n\}$ in $b = \min\{m,n\}$
+- če je $a$ sod: $$\kappa''(G) = \begin{cases}
+\Big(\Big\lfloor \frac{b}{a} \Big\rfloor + 1\Big) \cdot a & b \ \text{lih}\\
+\Big\lfloor \frac{b}{2} \Big\rfloor \cdot a& b\ \text{sod}
 \end{cases}$$
-
-Če je $a = \max{m,n}$ , $b = \min{m,n}$ lih:
-$$\begin{cases}
-a * b//2 - b//2 & b \ sod\\
-(b//a + 1) * a& b \ lih
+- če je $a$ lih:
+$$\kappa''(G) = \begin{cases}
+a \cdot \Big\lfloor \frac{b}{2} \Big\rfloor - \Big\lfloor \frac{b}{2} \Big\rfloor & b \ \text{sod}\\
+\Big(\Big\lfloor \frac{b}{a} \Big\rfloor + 1\Big) \cdot a& b \ \text{lih}
 \end{cases}$$
-
-Če sta $m$ in $n$ enaka: $$\kappa''(G) = m // 2 \cdot m$$
+- če sta $m$ in $n$ enaka: $$\kappa''(G) = \Big\lfloor \frac{m}{2} \Big\rfloor \cdot m$$
 
 
 
@@ -106,6 +110,14 @@ def poisci_grafe_z_wmdim_k_n(od, do, n):
                 if wmdim_k == n:
                     G.show()
 ```
+Funkcija `poisci_grafe_z_wmdim_k_n(od, do, n)` vrača grafe (slike) od velikosti `od` do vključno velikosti `do`.  Za vsakega od njih pri vsakem `k` preveri, ali je slučajno `wmdim_k == n` in če se to zgodi, ga vrne.
+
+### $wmdim_k(G) = 1$
+Takih grafov, glede na najine rezultate ni.
+
+### $wmdim_k(G) = 2$
+Rezultat tega so poti.
+
 **DODALA SLIKICE**
 
 ## Grafi z velikim $wmdim_k(G)$
