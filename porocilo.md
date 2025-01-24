@@ -55,7 +55,7 @@ def kappa_2_crti(G):
 ```
 
 ## Ugotovitve
-Po poganjanju kode (glej datoteko _prva_naloga.ipynb_) sva prišla do naslednjih ugotovitev.
+Po poganjanju kode (glej datoteko **prva_naloga.ipynb**) sva prišla do naslednjih ugotovitev.
 ### Cikli
 
 $$\kappa''(G) = \Big\lfloor\frac{n}{2}\Big\rfloor$$
@@ -80,19 +80,28 @@ $$\kappa''(G) = 2^{n-1}$$
 Za $wmdim_k(G)$ žal nisva našla vzorca.
 
 ### Kartezični produkti ciklov
-Pri kartezičnih produktih ciklov je za grafe s $k$-jem enakim $\kappa''(G)$ $$wmdim_k(G) = m\cdot n.$$
+Pri kartezičnih produktih ciklov je za grafe s $k$-jem enakim $\kappa''(G)$ 
+
+$$wmdim_k(G) = m\cdot n.$$
 
 Če gledamo kartezični produkt ciklov $C_m$ in $C_n$, velikosti $m$ in $n$ pa je $\kappa''(G)$ definiran s pomočjo: $a = \max\{m,n\}$ in $b = \min\{m,n\}$
-- če je $a$ sod: $$\kappa''(G) = \begin{cases}
+- če je $a$ sod: 
+
+$$\kappa''(G) = \begin{cases}
 \Big(\Big\lfloor \frac{b}{a} \Big\rfloor + 1\Big) \cdot a & b \ \text{lih}\\
 \Big\lfloor \frac{b}{2} \Big\rfloor \cdot a& b\ \text{sod}
 \end{cases}$$
+
 - če je $a$ lih:
+
 $$\kappa''(G) = \begin{cases}
 a \cdot \Big\lfloor \frac{b}{2} \Big\rfloor - \Big\lfloor \frac{b}{2} \Big\rfloor & b \ \text{sod}\\
 \Big(\Big\lfloor \frac{b}{a} \Big\rfloor + 1\Big) \cdot a& b \ \text{lih}
 \end{cases}$$
-- če sta $m$ in $n$ enaka: $$\kappa''(G) = \Big\lfloor \frac{m}{2} \Big\rfloor \cdot m$$
+
+- če sta $m$ in $n$ enaka: 
+
+$$\kappa''(G) = \Big\lfloor \frac{m}{2} \Big\rfloor \cdot m$$
 
 
 
@@ -142,7 +151,7 @@ Rezultat tega so poti. Spodaj so prikazani nekateri rezultati.
 </table>
 
 ### $wmdim_k(G) = 3$
-Grafov, ki imajo $wmdim_k(G) = 3$ je zelo veliko. Tukaj bi podala slike za grafe na petih vozliščih. Grafi na več kot petih vozliščih se nahajajo v datoteki "**druga_naloga.ipynb**"
+Grafov, ki imajo $wmdim_k(G) = 3$ je zelo veliko. Tukaj bi podala slike za grafe na petih vozliščih. Grafi na več kot petih vozliščih se nahajajo v datoteki "**druga_naloga.ipynb**".
 
 <table>
   <tr>
