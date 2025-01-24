@@ -84,7 +84,9 @@ Pri kartezičnih produktih ciklov je za grafe s $k$-jem enakim $\kappa''(G)$
 
 $$wmdim_k(G) = m\cdot n.$$
 
-Če gledamo kartezični produkt ciklov $C_m$ in $C_n$, velikosti $m$ in $n$ pa je $\kappa''(G)$ definiran s pomočjo: $a = \max\{m,n\}$ in $b = \min\{m,n\}$
+Če gledamo kartezični produkt ciklov $C_m$ in $C_n$, velikosti $m$ in $n$ pa je $\kappa''(G)$ definiran s pomočjo: 
+
+$$a = \max\{m,n\}\ \ \text{in} \ \ b = \min\{m,n\}$$
 - če je $a$ sod: 
 
 $$\kappa''(G) = \begin{cases}
