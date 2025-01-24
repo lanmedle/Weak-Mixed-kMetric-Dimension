@@ -116,9 +116,67 @@ Funkcija `poisci_grafe_z_wmdim_k_n(od, do, n)` vrača grafe (slike) od velikosti
 Takih grafov, glede na najine rezultate ni.
 
 ### $wmdim_k(G) = 2$
-Rezultat tega so poti.
+Rezultat tega so poti. Spodaj so prikazani nekateri rezultati.
 
-**DODALA SLIKICE**
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2petvozl.png?raw=true" alt="Slika 1" width="300"/>
+      <br> Slika 1: <i>Graf na petih vozliščih</i>
+    </td>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2sestvozl.png?raw=true" alt="Slika 2" width="300"/>
+      <br> Slika 2: <i>Graf na šestih vozliščih</i>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2sedemvozl.png?raw=true" alt="Slika 3" width="300"/>
+      <br> Slika 3: <i>Graf na sedmih vozliščih</i>
+    </td>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2osemvozl.png?raw=true" alt="Slika 4" width="300"/>
+      <br> Slika 4: <i>Graf na osmih vozliščih</i>
+    </td>
+  </tr>
+</table>
+
+### $wmdim_k(G) = 3$
+Grafov, ki imajo $wmdim_k(G) = 3$ je zelo veliko. Tukaj bi podala slike za grafe na petih vozliščih. Grafi na več kot petih vozliščih se nahajajo v datoteki "**druga_naloga.ipynb**"
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet1.png?raw=true" alt="Slika 5" width="300"/>
+      <br> Slika 5
+    </td>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet2.png?raw=true" alt="Slika 6" width="300"/>
+      <br> Slika 6
+    </td>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet3.png?raw=true" alt="Slika 7" width="300"/>
+      <br> Slika 7
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet4.png?raw=true" alt="Slika 8" width="300"/>
+      <br> Slika 8
+    </td>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet5.png?raw=true" alt="Slika 9" width="300"/>
+      <br> Slika 9
+    </td>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet6.png?raw=true" alt="Slika 10" width="300"/>
+      <br> Slika 10
+    </td>
+  </tr>
+</table>
+
+
+
 
 ## Grafi z velikim $wmdim_k(G)$
 Podobno kot za manjše $wmdim_k(G)$ sva napisala tudi funkcijo za večje, torej 
