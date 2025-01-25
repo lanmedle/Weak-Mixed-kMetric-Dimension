@@ -55,7 +55,7 @@ def kappa_2_crti(G):
 ```
 
 ## Ugotovitve
-Po poganjanju kode (glej datoteko _prva_naloga.ipynb_) sva prišla do naslednjih ugotovitev.
+Po poganjanju kode (glej datoteko **prva_naloga.ipynb**) sva prišla do naslednjih ugotovitev.
 ### Cikli
 
 $$\kappa''(G) = \Big\lfloor\frac{n}{2}\Big\rfloor$$
@@ -80,19 +80,30 @@ $$\kappa''(G) = 2^{n-1}$$
 Za $wmdim_k(G)$ žal nisva našla vzorca.
 
 ### Kartezični produkti ciklov
-Pri kartezičnih produktih ciklov je za grafe s $k$-jem enakim $\kappa''(G)$ $$wmdim_k(G) = m\cdot n.$$
+Pri kartezičnih produktih ciklov je za grafe s $k$-jem enakim $\kappa''(G)$ 
 
-Če gledamo kartezični produkt ciklov $C_m$ in $C_n$, velikosti $m$ in $n$ pa je $\kappa''(G)$ definiran s pomočjo: $a = \max\{m,n\}$ in $b = \min\{m,n\}$
-- če je $a$ sod: $$\kappa''(G) = \begin{cases}
+$$wmdim_k(G) = m\cdot n.$$
+
+Če gledamo kartezični produkt ciklov $C_m$ in $C_n$, velikosti $m$ in $n$ pa je $\kappa''(G)$ definiran s pomočjo: 
+
+$$a = \max\{m,n\}\ \ \text{in} \ \ b = \min\{m,n\}$$
+- če je $a$ sod: 
+
+$$\kappa''(G) = \begin{cases}
 \Big(\Big\lfloor \frac{b}{a} \Big\rfloor + 1\Big) \cdot a & b \ \text{lih}\\
 \Big\lfloor \frac{b}{2} \Big\rfloor \cdot a& b\ \text{sod}
 \end{cases}$$
+
 - če je $a$ lih:
+
 $$\kappa''(G) = \begin{cases}
 a \cdot \Big\lfloor \frac{b}{2} \Big\rfloor - \Big\lfloor \frac{b}{2} \Big\rfloor & b \ \text{sod}\\
 \Big(\Big\lfloor \frac{b}{a} \Big\rfloor + 1\Big) \cdot a& b \ \text{lih}
 \end{cases}$$
-- če sta $m$ in $n$ enaka: $$\kappa''(G) = \Big\lfloor \frac{m}{2} \Big\rfloor \cdot m$$
+
+- če sta $m$ in $n$ enaka: 
+
+$$\kappa''(G) = \Big\lfloor \frac{m}{2} \Big\rfloor \cdot m$$
 
 
 
@@ -116,9 +127,67 @@ Funkcija `poisci_grafe_z_wmdim_k_n(od, do, n)` vrača grafe (slike) od velikosti
 Takih grafov, glede na najine rezultate ni.
 
 ### $wmdim_k(G) = 2$
-Rezultat tega so poti.
+Rezultat tega so poti. Spodaj so prikazani nekateri rezultati.
 
-**DODALA SLIKICE**
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2petvozl.png?raw=true" alt="Slika 1" width="300"/>
+      <br> Slika 1: <i>Graf na petih vozliščih</i>
+    </td>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2sestvozl.png?raw=true" alt="Slika 2" width="300"/>
+      <br> Slika 2: <i>Graf na šestih vozliščih</i>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2sedemvozl.png?raw=true" alt="Slika 3" width="300"/>
+      <br> Slika 3: <i>Graf na sedmih vozliščih</i>
+    </td>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2osemvozl.png?raw=true" alt="Slika 4" width="300"/>
+      <br> Slika 4: <i>Graf na osmih vozliščih</i>
+    </td>
+  </tr>
+</table>
+
+### $wmdim_k(G) = 3$
+Grafov, ki imajo $wmdim_k(G) = 3$ je zelo veliko. Tukaj bi podala slike za grafe na petih vozliščih. Grafi na več kot petih vozliščih se nahajajo v datoteki "**druga_naloga.ipynb**".
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet1.png?raw=true" alt="Slika 5" width="300"/>
+      <br> Slika 5
+    </td>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet2.png?raw=true" alt="Slika 6" width="300"/>
+      <br> Slika 6
+    </td>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet3.png?raw=true" alt="Slika 7" width="300"/>
+      <br> Slika 7
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet4.png?raw=true" alt="Slika 8" width="300"/>
+      <br> Slika 8
+    </td>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet5.png?raw=true" alt="Slika 9" width="300"/>
+      <br> Slika 9
+    </td>
+    <td>
+      <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet6.png?raw=true" alt="Slika 10" width="300"/>
+      <br> Slika 10
+    </td>
+  </tr>
+</table>
+
+
+
 
 ## Grafi z velikim $wmdim_k(G)$
 Podobno kot za manjše $wmdim_k(G)$ sva napisala tudi funkcijo za večje, torej 
