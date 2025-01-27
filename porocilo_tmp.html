@@ -371,7 +371,7 @@ code {
 kartezične produkte ciklov. S pomočjo tega, sva poskusila uganit bolj splošne formule za $\kappa''(G)$ in $wmdim_k(G)$.</p>
 <p>Nato sva s pomočjo sistematičnega in stohastičnega iskanja (hill-climbing in simulated annealing) iskala grafe za katere je $wmdim_k(G)$ velik oz. majhen.</p>
 <h2 id="clp-program">CLP program</h2>
-<p>Kot že rečeno sva najprej morala napisati CLP program, ki bo vračal $wmdim_k(G)$. Ker mora najin program izračunati tudi razdalje med vozlišči in povezavami sva zato naprej definirala funkcijo razdalja, ki naredi prav to.</p>
+<p>Kot že rečeno sva najprej morala napisati CLP program, ki bo vračal $wmdim_k(G)$. Ker mora najin program izračunati tudi razdalje med vozlišči in povezavami sva zato naprej definirala funkcijo razdalja, ki naredi prav to. Funkcija <code>razdalja</code> sprejmetri argumente: <code>moznost</code>, <code>vozlisce</code> in <code>G</code>, kjer je moznost podana kot par <code>(c,a)</code>, kjer <code>c</code> pove ali imamo povezavo ali vozlišče, <code>a</code> pa je potem ta povezava oz. vozlišče, do katerega raučnamo razdaljo. Razdalja od vozlišča do povezave <code>UV</code> je definirana kot najkrajša razdalja od vozlišča <code>vozlisce</code> do <code>U</code> oz. <code>V</code>.</p>
 <pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">razdalja</span><span class="hljs-params">(moznost, vozlisce, G)</span>:</span>
     c, a = moznost
     <span class="hljs-keyword">if</span> c == <span class="hljs-string">'e'</span>:
@@ -380,6 +380,7 @@ kartezične produkte ciklov. S pomočjo tega, sva poskusila uganit bolj splošne
     <span class="hljs-keyword">else</span>:
         <span class="hljs-keyword">return</span> G.distance(a, vozlisce)
 </div></code></pre>
+<p>CLP program za šibko mešano k-metrično dimenzijo je zelo podobne CLP programu za šibko k-metrično dimenzijo s to izjemo, da moramo pri mešani upoštevati tudi vse povezave. To sva naredila tako, da sva definirala <code>moznosti</code> kot seznam povezav in vozlišč in vsako izmed njih poimenovala - da bo funkcija razdalja vedela, ali gre za vozlišče ali povezavo (problem bi drugače nastal pri kartezičnih produktih ciklov). Pri samem programu pa sva si pomagala z vgrajeno funkcijo <code>MixedIntegerLinearProgram</code> s katero sva potem dobila <code>wmdim_k</code> od grafa <code>G</code> za nek določen <code>k</code>.</p>
 <pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">CLP_weak_mixed_k_dim</span><span class="hljs-params">(G, k)</span>:</span>
     p = MixedIntegerLinearProgram(maximization=<span class="hljs-literal">False</span>)
     x = p.new_variable(binary=<span class="hljs-literal">True</span>)
@@ -401,7 +402,7 @@ kartezične produkte ciklov. S pomočjo tega, sva poskusila uganit bolj splošne
 
     <span class="hljs-keyword">return</span> (wmdim_k, mnozica_S)
 </div></code></pre>
-<p>Sedaj nam za prvi del preostane samo še izračun $\kappa''(G)$</p>
+<p>Sedaj nam za prvi del preostane samo še izračun $\kappa''(G)$. Tega dobimo tako, da pogledamo do katerega <code>k</code> funkcija <code>CLP_weak_mixed_k_dim</code> ne dobi napake. Največji tak <code>k</code> je ravno $\kappa''(G)$.</p>
 <pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">kappa_2_crti</span><span class="hljs-params">(G)</span>:</span>
     k = <span class="hljs-number">1</span>
     <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
@@ -411,7 +412,8 @@ kartezične produkte ciklov. S pomočjo tega, sva poskusila uganit bolj splošne
         <span class="hljs-keyword">except</span>:
             <span class="hljs-keyword">return</span> k - <span class="hljs-number">1</span>
 </div></code></pre>
-<h2 id="ugibanje-formul">Ugibanje formul</h2>
+<h2 id="ugotovitve">Ugotovitve</h2>
+<p>Po poganjanju kode (glej datoteko <strong>prva_naloga.ipynb</strong>) sva prišla do naslednjih ugotovitev.</p>
 <h3 id="cikli">Cikli</h3>
 <p>$$\kappa''(G) = \Big\lfloor\frac{n}{2}\Big\rfloor$$
 $$wmdim_1(G) = 3$$
@@ -423,13 +425,172 @@ $$wmdim_k(G) = \begin{cases}
 <p>$$\kappa''(G) = 1$$
 $$wmdim_1(G) = n$$</p>
 <h3 id="dvodelni-polni-grafi">Dvodelni polni grafi</h3>
-<p>Za dvodelne polne grafe za katere je $m$ ali $n$ enak $1$, je $\kappa''(G)$ = 1, $wmdim_k(G)$ je tedaj enak $m\cdot n$. Izjema je dvodelni polni graf, kjer sta $m$ in $n$ enaka $1$, tedaj je $\kappa''(G) = 1, \ wmdim_k(G) = 2$, torej $m+n$. Za dvodelne polne grafe, za katere $m$ in $n$ nista enaka $1$, je $\kappa''(G) = 2$. $wmdim_k(G)$ je za $k=1$ enak $m+n-1$, če je $m$ ali $n$ enak $2$, v nasprotnem primeru pa je enak $m+n-2$. Za $k=2$ je $wmdim_k(G)$ enak $m+n$.</p>
+<ul>
+<li>Za dvodelne polne grafe za katere je bil $m$ ali $n$ enak $1$, je $\kappa''(G) = 1$, $wmdim_k(G)$ je tedaj enak $m\cdot n$. Izjema je dvodelni polni graf, kjer sta $m$ in $n$ enaka $1$, tedaj je $\kappa''(G) = 1, \ wmdim_k(G) = 2$, torej $m+n$.</li>
+<li>Za dvodelne polne grafe, za katere $m$ in $n$ nista enaka $1$, je $\kappa''(G) = 2$. $wmdim_k(G)$ je za $k=1$ enak $m+n-1$, če je $m$ ali $n$ enak $2$, v nasprotnem primeru pa je enak $m+n-2$. Za $k=2$ je $wmdim_k(G)$ enak $m+n$.</li>
+</ul>
 <h3 id="hiperkocke">Hiperkocke</h3>
 <p>$$\kappa''(G) = 2^{n-1}$$
 Za $wmdim_k(G)$ žal nisva našla vzorca.</p>
 <h3 id="kartezi%C4%8Dni-produkti-ciklov">Kartezični produkti ciklov</h3>
-<p>Pri kartezičnih produktih ciklov je za grafe s $k$-jem enakim $\kappa''(G)$ $$wmdim_k(G) = m\cdot n.$$</p>
-<h2 id="grafi-z-wmdimkg-in-123">Grafi z $wmdim_k(G) \in {1,2,3}$</h2>
+<p>Pri kartezičnih produktih ciklov je za grafe s $k$-jem enakim $\kappa''(G)$</p>
+<p>$$wmdim_k(G) = m\cdot n.$$</p>
+<p>Če gledamo kartezični produkt ciklov $C_m$ in $C_n$, velikosti $m$ in $n$ pa je $\kappa''(G)$ definiran s pomočjo:</p>
+<p>$$a = \max{m,n}\ \ \text{in} \ \ b = \min{m,n}$$</p>
+<ul>
+<li>če je $a$ sod:</li>
+</ul>
+<p>$$\kappa''(G) = \begin{cases}
+\Big(\Big\lfloor \frac{b}{a} \Big\rfloor + 1\Big) \cdot a,&amp; b \ \text{lih}\
+\Big\lfloor \frac{b}{2} \Big\rfloor \cdot a,&amp; b\ \text{sod}
+\end{cases}$$</p>
+<ul>
+<li>če je $a$ lih:</li>
+</ul>
+<p>$$\kappa''(G) = \begin{cases}
+a \cdot \Big\lfloor \frac{b}{2} \Big\rfloor - \Big\lfloor \frac{b}{2} \Big\rfloor, &amp; b \ \text{sod}\
+\Big(\Big\lfloor \frac{b}{a} \Big\rfloor + 1\Big) \cdot a,&amp; b \ \text{lih}
+\end{cases}$$</p>
+<ul>
+<li>če sta $m$ in $n$ enaka:</li>
+</ul>
+<p>$$\kappa''(G) = \Big\lfloor \frac{m}{2} \Big\rfloor \cdot m$$</p>
+<h2 id="grafi-z-malim-wmdimkg">Grafi z malim $wmdim_k(G)$</h2>
+<p>Za iskanje grafov z malim, torej $1,, 2$ ali $3$, $wmdim_k(G)$ sva napisala kodo, ki jih bo generirala s pomočjo funkcije <code>nauty_geng</code>.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">poisci_grafe_z_wmdim_k_n</span><span class="hljs-params">(od, do, n)</span>:</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(od, do + <span class="hljs-number">1</span>):
+        print(<span class="hljs-string">f'Povezani grafi na <span class="hljs-subst">{i}</span> vozliscih z wmdim_k(G) = <span class="hljs-subst">{n}</span>:'</span>)
+        <span class="hljs-keyword">for</span> G <span class="hljs-keyword">in</span> graphs.nauty_geng(<span class="hljs-string">f'<span class="hljs-subst">{i}</span> -c'</span>):
+            kappa_2crti = kappa_2_crti(G)
+            <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, kappa_2crti + <span class="hljs-number">1</span>):
+                wmdim_k, _ = CLP_weak_k_dim(G, k)
+                <span class="hljs-keyword">if</span> wmdim_k == n:
+                    G.show()
+</div></code></pre>
+<p>Funkcija <code>poisci_grafe_z_wmdim_k_n(od, do, n)</code> vrača grafe (slike) od velikosti <code>od</code> do vključno velikosti <code>do</code>.  Za vsakega od njih pri vsakem <code>k</code> preveri, ali je slučajno <code>wmdim_k == n</code> in če se to zgodi, ga vrne.</p>
+<h3 id="wmdimkg--1">$wmdim_k(G) = 1$</h3>
+<p>Takih grafov, glede na najine rezultate ni.</p>
+<h3 id="wmdimkg--2">$wmdim_k(G) = 2$</h3>
+<p>Rezultat tega so poti. Spodaj so prikazani nekateri rezultati.</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2petvozl.png?raw=true" alt="Graf na petih volziščih" title="Slika 1"></th>
+<th><img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2sestvozl.png?raw=true" alt="Alt 2" title="Slika 2"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Slika 1: <em>Graf na petih vozliščih</em></td>
+<td>Slika 2: <em>Graf na šestih vozliščih</em></td>
+</tr>
+<tr>
+<td><img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2sedemvozl.png?raw=true" alt="Alt 3" title="Slika 3"></td>
+<td><img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2osemvozl.png?raw=true" alt="Alt 4" title="Slika 4"></td>
+</tr>
+<tr>
+<td>Slika 3: <em>Graf na sedmih vozliščih</em></td>
+<td>Slika 4: <em>Graf na osmih vozliščih</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="wmdimkg--3">$wmdim_k(G) = 3$</h3>
+<p>Grafov, ki imajo $wmdim_k(G) = 3$ je zelo veliko. Tukaj bi podala slike za grafe na petih vozliščih. Grafi na več kot petih vozliščih se nahajajo v datoteki &quot;<strong>druga_naloga.ipynb</strong>&quot;.</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet1.png?raw=true" alt="Alt 1" title="Slika 5"></th>
+<th><img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet2.png?raw=true" alt="Alt 2" title="Slika 6"></th>
+<th><img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet3.png?raw=true" alt="Alt 3" title="Slika 7"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Slika 5</td>
+<td>Slika 6</td>
+<td>Slika 7</td>
+</tr>
+<tr>
+<td><img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet4.png?raw=true" alt="Alt 1" title="Slika 8"></td>
+<td><img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet5.png?raw=true" alt="Alt 2" title="Slika 9"></td>
+<td><img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet6.png?raw=true" alt="Alt 3" title="Slika 10"></td>
+</tr>
+<tr>
+<td>Slika 8</td>
+<td>Slika 9</td>
+<td>Slika 10</td>
+</tr>
+</tbody>
+</table>
+<h2 id="grafi-z-velikim-wmdimkg">Grafi z velikim $wmdim_k(G)$</h2>
+<p>Podobno kot za manjše $wmdim_k(G)$ sva napisala tudi funkcijo za večje, torej</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">poisci_grafe_z_wmdim_k_n_minus_k</span><span class="hljs-params">(od, do, k)</span>:</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(od, do + <span class="hljs-number">1</span>):
+        print(<span class="hljs-string">f'Povezani grafi na <span class="hljs-subst">{i}</span> vozliscih z wmdim_k(G) = <span class="hljs-subst">{i-k}</span>:'</span>)
+        <span class="hljs-keyword">for</span> G <span class="hljs-keyword">in</span> graphs.nauty_geng(<span class="hljs-string">f'<span class="hljs-subst">{i}</span> -c'</span>):
+            kappa_2crti = kappa_2_crti(G)
+            <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, kappa_2crti + <span class="hljs-number">1</span>):
+                wmdim_k, _ = CLP_weak_k_dim(G, k)
+                <span class="hljs-keyword">if</span> wmdim_k == i - k:
+                    G.show()
+</div></code></pre>
+<h2 id="stohasti%C4%8Dno-iskanje-wmdimkg-za-velike-grafe">Stohastično iskanje $wmdim_k(G)$ za velike grafe</h2>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">generate_random_connected_graph</span><span class="hljs-params">(n, p)</span>:</span>
+    
+    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+        G = graphs.RandomGNP(n, p)
+        <span class="hljs-keyword">if</span> G.is_connected():
+            <span class="hljs-keyword">return</span> G
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">simulated_annealing</span><span class="hljs-params">(n, k, target_wmdim, max_iterations=<span class="hljs-number">1000</span>, initial_temp=<span class="hljs-number">10</span>, cooling_rate=<span class="hljs-number">0.95</span>)</span>:</span>
+    
+    current_graph = generate_random_connected_graph(n, random.uniform(<span class="hljs-number">0.2</span>, <span class="hljs-number">0.8</span>))
+    current_temp = initial_temp
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">objective</span><span class="hljs-params">(graph)</span>:</span>
+        <span class="hljs-keyword">try</span>:
+            wmdim_k, _ = CLP_weak_mixed_k_dim(graph, k)
+            <span class="hljs-keyword">return</span> abs(wmdim_k - target_wmdim), wmdim_k
+        <span class="hljs-keyword">except</span> (ValueError, MIPSolverException):
+            <span class="hljs-keyword">return</span> float(<span class="hljs-string">'inf'</span>), <span class="hljs-literal">None</span>
+
+    current_cost, current_wmdim = objective(current_graph)
+    best_graph = current_graph
+    best_cost = current_cost
+    best_wmdim = current_wmdim
+
+    <span class="hljs-keyword">for</span> iteration <span class="hljs-keyword">in</span> range(max_iterations):
+        new_graph = current_graph.copy()
+        <span class="hljs-keyword">if</span> random.random() &lt; <span class="hljs-number">0.5</span>:
+            u, v = random.sample(range(n), <span class="hljs-number">2</span>)
+            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> new_graph.has_edge(u, v):
+                new_graph.add_edge(u, v)
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">if</span> new_graph.size() &gt; n - <span class="hljs-number">1</span>:
+                u, v = random.choice(new_graph.edges(labels=<span class="hljs-literal">False</span>))
+                new_graph.delete_edge(u, v)
+        
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> new_graph.is_connected():
+            <span class="hljs-keyword">continue</span>
+
+        new_cost, new_wmdim = objective(new_graph)
+        <span class="hljs-keyword">if</span> new_cost &lt; current_cost <span class="hljs-keyword">or</span> random.random() &lt; math.exp((current_cost - new_cost) / current_temp):
+            current_graph = new_graph
+            current_cost = new_cost
+            current_wmdim = new_wmdim
+            <span class="hljs-keyword">if</span> current_cost &lt; best_cost:
+                best_graph = current_graph
+                best_cost = current_cost
+                best_wmdim = current_wmdim
+
+        current_temp *= cooling_rate
+        print(<span class="hljs-string">f"Iteration <span class="hljs-subst">{iteration + <span class="hljs-number">1</span>}</span>: Current wmdim_k = <span class="hljs-subst">{current_wmdim}</span>, Best wmdim_k = <span class="hljs-subst">{best_wmdim}</span>"</span>)
+
+        <span class="hljs-keyword">if</span> best_cost == <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">break</span>
+
+    <span class="hljs-keyword">return</span> best_graph, best_wmdim
+</div></code></pre>
 
 </body>
 </html>

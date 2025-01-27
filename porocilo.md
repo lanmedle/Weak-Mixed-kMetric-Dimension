@@ -90,15 +90,15 @@ $$a = \max\{m,n\}\ \ \text{in} \ \ b = \min\{m,n\}$$
 - če je $a$ sod: 
 
 $$\kappa''(G) = \begin{cases}
-\Big(\Big\lfloor \frac{b}{a} \Big\rfloor + 1\Big) \cdot a & b \ \text{lih}\\
-\Big\lfloor \frac{b}{2} \Big\rfloor \cdot a& b\ \text{sod}
+\Big(\Big\lfloor \frac{b}{a} \Big\rfloor + 1\Big) \cdot a,& b \ \text{lih}\\
+\Big\lfloor \frac{b}{2} \Big\rfloor \cdot a,& b\ \text{sod}
 \end{cases}$$
 
 - če je $a$ lih:
 
 $$\kappa''(G) = \begin{cases}
-a \cdot \Big\lfloor \frac{b}{2} \Big\rfloor - \Big\lfloor \frac{b}{2} \Big\rfloor & b \ \text{sod}\\
-\Big(\Big\lfloor \frac{b}{a} \Big\rfloor + 1\Big) \cdot a& b \ \text{lih}
+a \cdot \Big\lfloor \frac{b}{2} \Big\rfloor - \Big\lfloor \frac{b}{2} \Big\rfloor, & b \ \text{sod}\\
+\Big(\Big\lfloor \frac{b}{a} \Big\rfloor + 1\Big) \cdot a,& b \ \text{lih}
 \end{cases}$$
 
 - če sta $m$ in $n$ enaka: 
