@@ -231,7 +231,15 @@ def simulated_annealing(n, k, target_wmdim, max_iterations=1000, initial_temp=10
     best_cost = current_cost
     best_wmdim = current_wmdim
 
+    none_count = 0
+
     for iteration in range(max_iterations):
+        if none_count >= 20:
+          print("Regenerating graph due to 20 consecutive None values for current_wmdim.")
+          current_graph = generate_new_graph()
+          current_cost, current_wmdim = objective(current_graph)
+          none_count = 0
+        
         new_graph = current_graph.copy()
         if random.random() < 0.5:
             u, v = random.sample(range(n), 2)
@@ -246,6 +254,12 @@ def simulated_annealing(n, k, target_wmdim, max_iterations=1000, initial_temp=10
             continue
 
         new_cost, new_wmdim = objective(new_graph)
+
+        if new_wmdim is None:
+          none_count += 1
+        else:
+          none_count = 0
+        
         if new_cost < current_cost or random.random() < math.exp((current_cost - new_cost) / current_temp):
             current_graph = new_graph
             current_cost = new_cost
@@ -263,3 +277,21 @@ def simulated_annealing(n, k, target_wmdim, max_iterations=1000, initial_temp=10
 
     return best_graph, best_wmdim
 ```
+
+Za iskanje velikih grafov z  majhnim `wmdim_k` \(3\), oziroma velikim `wmdim_k` \(n - 2, n - 1, n\) sva uporabila stohastično iskanje, in sicer sva implimentirala funkcijo `simulated_annealing`. Simulirano ohlajanje je optimizacijska metoda, ki se uporablja za iskanje globalnega optimuma funkcije v velikem prostoru rešitev. Najina koda implementira algoritem simuliranega ohlajanja za iskanje grafa, katerega šibko mešana k-dimenzija \(`wmdim_k`\), se čim bolj približa ciljni vrednosti \(`target_wmdim`\). Algoritem postopoma prilagaja strukturo grafa, da bi minimiziral razliko med trenutno in ciljno vrednostjo. Obenem pa dopušča tudi "slabše" rešitve, kar preprečuje, da bi algoritem obtičal v lokalnih minimumih.
+
+Parametri funkcije `simulated_annealing`:
+- **n**: Število vozlišč grafa.
+- **k**: Dimenzija `k`, za katero se računa `wmdim_k`.
+- **target_wmdim**: Ciljna vrednost `wmdim_k`, ki jo želimo doseči.
+- **max_iterations**: Največje število iteracij algoritma.
+- **initial_temp**: Začetna temperatura.
+- **cooling_rate**: Faktor, s katerim se na vsakem koraku zmanjša temperatura.
+
+Na začetku koda generira naključni povezani graf s pomočjo funkcije `generate_random_connected_graph`, ki sprejme parametre **n**, torej število vozlišč grafa in **p**, ki predstavlja verjetnost povezave med vozlišči. S tem se zagotovi, da je začetni graf povezan, saj nepovezani grafi niso primerni za izračun `wmdim_k`.
+
+Ciljna funkcija `objective` izračuna razdaljo med trenutno vrednostjo `wmdim_k` grafa in ciljno vrednostjo `target_wmdim_k`. Če izračun `wmdim_k` ni mogoč \(generiran graf je "preredek" za smiselno izračunavanje `wmdim_k` oziroma je parameter **k** prevelik glede na strukturo grafa\), funkcija vrne vrednost `None`.
+
+V glavnem delu koda `simulated_annealing` na vsakem koraku ustvari novo različico trenutnega grafa, na način, da z verjetnostjo 0.5 doda novo povezavo med naključnima vozliščema, v primeru da ta ne obstaja. Sicer pa odstrani naključno obstoječo povezavo, če graf pri tem procesu ostane povezan. Nato koda izračuna vrednost `wmdim_k` za posodobljeni graf z uporabo ciljne funkcije. Če ta vrne vrednost `None`, se vrednost `none_count` poveča za ena. Če pride do dvajset zaporednih ponovitev vrednosti `None`, se trenutni graf zamenja z novim naključno generiranim povezanim grafom. V primeru, da ciljna funkcija vrne vrednost, ki ji enaka `None` algoritem sprejme spremembo grafa, če se razlika med trenutno in ciljno vrednostjo zmanjša. Z določenim naključjem pa sprejme tudi "poslabšanje" grafa, s čimer se izognemo, da bi obtičali v lokalnih minimumih. Na vsakem koraku prav tako pride do zmanjšanja temperature s faktorjem `cooling_rate`. Nižja temperatura zmanjša verjetnost sprejetja "poslabšanja", kar vodi v stabilizacijo rešitve
+
+Algoritem se zaključi, ko doseže maksimalno število iteracij ali pa najde graf, katerega `wmdim_k` ustreza ciljni vrednosti.
