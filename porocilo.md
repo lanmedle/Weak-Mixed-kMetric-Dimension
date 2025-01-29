@@ -287,6 +287,32 @@ Na začetku koda generira naključni povezani graf s pomočjo funkcije `generate
 
 Ciljna funkcija `objective` izračuna razdaljo med trenutno vrednostjo `wmdim_k` grafa in ciljno vrednostjo `target_wmdim_k`. Če izračun `wmdim_k` ni mogoč \(generiran graf je "preredek" za smiselno izračunavanje `wmdim_k` oziroma je parameter **k** prevelik glede na strukturo grafa\), funkcija vrne vrednost `None`.
 
-V glavnem delu koda `simulated_annealing` na vsakem koraku ustvari novo različico trenutnega grafa, na način, da z verjetnostjo 0.5 doda novo povezavo med naključnima vozliščema, v primeru da ta ne obstaja. Sicer pa odstrani naključno obstoječo povezavo, če graf pri tem procesu ostane povezan. Nato koda izračuna vrednost `wmdim_k` za posodobljeni graf z uporabo ciljne funkcije. Če ta vrne vrednost `None`, se vrednost `none_count` poveča za ena. Če pride do dvajset zaporednih ponovitev vrednosti `None`, se trenutni graf zamenja z novim naključno generiranim povezanim grafom. V primeru, da ciljna funkcija vrne vrednost, ki ji enaka `None` algoritem sprejme spremembo grafa, če se razlika med trenutno in ciljno vrednostjo zmanjša. Z določenim naključjem pa sprejme tudi "poslabšanje" grafa, s čimer se izognemo, da bi obtičali v lokalnih minimumih. Na vsakem koraku prav tako pride do zmanjšanja temperature s faktorjem `cooling_rate`. Nižja temperatura zmanjša verjetnost sprejetja "poslabšanja", kar vodi v stabilizacijo rešitve
+V glavnem delu koda `simulated_annealing` na vsakem koraku ustvari novo različico trenutnega grafa, na način, da z verjetnostjo 0.5 doda novo povezavo med naključnima vozliščema, v primeru da ta ne obstaja. Sicer pa odstrani naključno obstoječo povezavo, če graf pri tem procesu ostane povezan. Nato koda izračuna vrednost `wmdim_k` za posodobljeni graf z uporabo ciljne funkcije. Če ta vrne vrednost `None`, se vrednost `none_count` poveča za ena. Če pride do dvajset zaporednih ponovitev vrednosti `None`, se trenutni graf zamenja z novim naključno generiranim povezanim grafom. V primeru, da ciljna funkcija vrne vrednost, ki ji enaka `None` algoritem sprejme spremembo grafa, če se razlika med trenutno in ciljno vrednostjo zmanjša. Z določenim naključjem pa sprejme tudi "poslabšanje" grafa, s čimer se izognemo, da bi obtičali v lokalnih minimumih. Na vsakem koraku prav tako pride do zmanjšanja temperature s faktorjem `cooling_rate`. Nižja temperatura zmanjša verjetnost sprejetja "poslabšanja", kar vodi v stabilizacijo rešitve.
 
 Algoritem se zaključi, ko doseže maksimalno število iteracij ali pa najde graf, katerega `wmdim_k` ustreza ciljni vrednosti.
+
+### $wmdim_k(G) = 3$ 
+
+<p align="center">
+  <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimn3.png?raw=true" alt="Slika 34" width="125"/>
+</p>
+<p align="center">Slika 34: k = 1</p>
+
+### $wmdim_k(G) = n-2$
+
+| ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimnn-2.png?raw=true "Slika 35") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimn2n-2.png?raw=true "Slika 36") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimn3n-2.png?raw=true "Slika 37") |
+|-----------------------|-----------------------|-----------------------|
+| Slika 35: k = 1   | Slika 36: k = 2         | Slika 37: k = 3        |
+
+
+### $wmdim_k(G) = n-1$
+
+| ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimnn-1.png?raw=true "Slika 38") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimn2n-1.png?raw=true "Slika 39") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimn3n-1.png?raw=true "Slika 40") |
+|-----------------------|-----------------------|-----------------------|
+| Slika 38: k = 1   | Slika 39: k = 2         | Slika 40: k = 3        |
+
+### $wmdim_k(G) = n$
+
+| ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimnn.png?raw=true "Slika 41") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimn2n.png?raw=true "Slika 42") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimn3n.png?raw=true "Slika 43") |
+|-----------------------|-----------------------|-----------------------|
+| Slika 41: k = 1   | Slika 42: k = 2         | Slika 43: k = 3        |
