@@ -2,7 +2,7 @@
 
 ## Uvod
 Najina naloga je bila, da napiševa CLP program za izračun šibke mešane $k$-metrične dimenzije $wmdim_k(G)$ in določiti $\kappa''(G)$ ter $wmdim_k(G)$ za cikle, polne grafe, dvodelne polne grafe, hiperkocke in
-kartezične produkte ciklov. S pomočjo tega, sva poskusila uganit bolj splošne formule za $\kappa''(G)$ in $wmdim_k(G)$.
+kartezične produkte ciklov. S pomočjo tega, sva poskusila uganiti bolj splošne formule za $\kappa''(G)$ in $wmdim_k(G)$.
 
 Nato sva s pomočjo sistematičnega in stohastičnega iskanja (hill-climbing in simulated annealing) iskala grafe za katere je $wmdim_k(G)$ velik oz. majhen.
 
@@ -56,6 +56,7 @@ def kappa_2_crti(G):
 
 ## Ugotovitve
 Po poganjanju kode (glej datoteko **prva_naloga.ipynb**) sva prišla do naslednjih ugotovitev.
+
 ### Cikli
 
 $$\kappa''(G) = \Big\lfloor\frac{n}{2}\Big\rfloor$$
@@ -84,9 +85,12 @@ Pri kartezičnih produktih ciklov je za grafe s $k$-jem enakim $\kappa''(G)$
 
 $$wmdim_k(G) = m\cdot n.$$
 
+Za ostale $k$ nisva znala določiti splošne formule za $wmdim_k(G)$.
+
 Če gledamo kartezični produkt ciklov $C_m$ in $C_n$, velikosti $m$ in $n$ pa je $\kappa''(G)$ definiran s pomočjo: 
 
 $$a = \max\{m,n\}\ \ \text{in} \ \ b = \min\{m,n\}$$
+
 - če je $a$ sod: 
 
 $$\kappa''(G) = \begin{cases}
@@ -124,7 +128,7 @@ def poisci_grafe_z_wmdim_k_n(od, do, n):
 Funkcija `poisci_grafe_z_wmdim_k_n(od, do, n)` vrača grafe (slike) od velikosti `od` do vključno velikosti `do`.  Za vsakega od njih pri vsakem `k` preveri, ali je slučajno `wmdim_k == n` in če se to zgodi, ga vrne.
 
 ### $wmdim_k(G) = 1$
-Takih grafov, glede na najine rezultate ni.
+Takih grafov, glede na najine rezultate ni. Sklepava, da pride do tega, ker je do nekega vozlišča in tiste povezave enaka razdalja. Zaradi tega  bo $$ \Delta_S(a,b) = \sum_{s\in S} |d(s,a) - d(s,b)| = 0,$$ kjer je $S\subseteq V(G), \ a,b \in V(G) \cup E(G).$
 
 ### $wmdim_k(G) = 2$
 Rezultat tega so poti. Spodaj so prikazani nekateri rezultati.
@@ -256,6 +260,7 @@ def simulated_annealing(n, k, target_wmdim, max_iterations=1000, initial_temp=10
           none_count = 0
         
         if new_cost < current_cost or random.random() < math.exp((current_cost - new_cost) / current_temp):
+            
             current_graph = new_graph
             current_cost = new_cost
             current_wmdim = new_wmdim
@@ -289,14 +294,18 @@ Ciljna funkcija `objective` izračuna razdaljo med trenutno vrednostjo `wmdim_k`
 
 V glavnem delu koda `simulated_annealing` na vsakem koraku ustvari novo različico trenutnega grafa, na način, da z verjetnostjo 0.5 doda novo povezavo med naključnima vozliščema, v primeru da ta ne obstaja. Sicer pa odstrani naključno obstoječo povezavo, če graf pri tem procesu ostane povezan. Nato koda izračuna vrednost `wmdim_k` za posodobljeni graf z uporabo ciljne funkcije. Če ta vrne vrednost `None`, se vrednost `none_count` poveča za ena. Če pride do dvajset zaporednih ponovitev vrednosti `None`, se trenutni graf zamenja z novim naključno generiranim povezanim grafom. V primeru, da ciljna funkcija vrne vrednost, ki ji enaka `None` algoritem sprejme spremembo grafa, če se razlika med trenutno in ciljno vrednostjo zmanjša. Z določenim naključjem pa sprejme tudi "poslabšanje" grafa, s čimer se izognemo, da bi obtičali v lokalnih minimumih. Na vsakem koraku prav tako pride do zmanjšanja temperature s faktorjem `cooling_rate`. Nižja temperatura zmanjša verjetnost sprejetja "poslabšanja", kar vodi v stabilizacijo rešitve.
 
-Algoritem se zaključi, ko doseže maksimalno število iteracij ali pa najde graf, katerega `wmdim_k` ustreza ciljni vrednosti.
+Algoritem se zaključi, ko doseže maksimalno število iteracij ali pa najde graf, katerega `wmdim_k` ustreza ciljni vrednosti. 
+
+Izvedla sva `simulated_annealing` na grafu z dvajsetimi vozlišči. Za ostale informacije pa si lahko ogledate datoteko **hill_climbing.ipynb**.
 
 ### $wmdim_k(G) = 3$ 
 
-<p align="center">
-  <img src="https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimn3.png?raw=true" alt="Slika 34" width="125"/>
-</p>
-<p align="center">Slika 34: k = 1</p>
+
+| ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimn3.png?raw=true) |
+|:--:| 
+|Slika 34: k = 1|
+
+
 
 ### $wmdim_k(G) = n-2$
 
@@ -316,3 +325,7 @@ Algoritem se zaključi, ko doseže maksimalno število iteracij ali pa najde gra
 | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimnn.png?raw=true "Slika 41") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimn2n.png?raw=true "Slika 42") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/lan-branch/slike/wmdimn3n.png?raw=true "Slika 43") |
 |-----------------------|-----------------------|-----------------------|
 | Slika 41: k = 1   | Slika 42: k = 2         | Slika 43: k = 3        |
+
+# Zaključek
+V najini projektni nalogi sva uganila formule za $wmdim_k(G)$ in $\kappa''(G)$ za nekatere točno določene grafe. Pogledala sva si tudi kdaj je $wmdim_k(G)$ majhen oz. velik. 
+S pomočjo stohastičnega iskanja pa sva si pogledala še kakšne grafe bi dobila, če bi imela več vozlišč (20). Opazila sva, da imajo taki grafi za velik $wmdim_k(G)$ veliko povezav.
