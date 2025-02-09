@@ -7,7 +7,7 @@ kartezične produkte ciklov. S pomočjo tega, sva poskusila uganiti bolj splošn
 Nato sva s pomočjo sistematičnega in stohastičnega iskanja (hill-climbing in simulated annealing) iskala grafe za katere je $wmdim_k(G)$ velik oz. majhen.
 
 ## CLP program
-Kot že rečeno sva najprej morala napisati CLP program, ki bo vračal $wmdim_k(G)$. Ker mora najin program izračunati tudi razdalje med vozlišči in povezavami sva zato naprej definirala funkcijo razdalja, ki naredi prav to. Funkcija `razdalja` sprejmetri argumente: `moznost`, `vozlisce` in `G`, kjer je moznost podana kot par `(c,a)`, kjer `c` pove ali imamo povezavo ali vozlišče, `a` pa je potem ta povezava oz. vozlišče, do katerega raučnamo razdaljo. Razdalja od vozlišča do povezave `UV` je definirana kot najkrajša razdalja od vozlišča `vozlisce` do `U` oz. `V`.
+Kot že rečeno sva najprej morala napisati CLP program, ki bo vračal $wmdim_k(G)$. Ker mora najin program izračunati tudi razdalje med vozlišči in povezavami sva zato naprej definirala funkcijo razdalja, ki naredi prav to. Funkcija `razdalja` sprejme tri argumente: `moznost`, `vozlisce` in `G`, kjer je moznost podana kot par `(c,a)`, kjer `c` pove ali imamo povezavo ali vozlišče, `a` pa je potem ta povezava oz. vozlišče, do katerega raučnamo razdaljo. Razdalja od vozlišča do povezave `UV` je definirana kot najkrajša razdalja od vozlišča `vozlisce` do `U` oz. `V`.
 ```py
 def razdalja(moznost, vozlisce, G):
     c, a = moznost
@@ -80,12 +80,80 @@ $$wmdim_1(G) = n$$
 $$\kappa''(G) = 2^{n-1}$$
 Za $wmdim_k(G)$ žal nisva našla vzorca.
 
+``` py
+- velikost: 3 : kappa = 4
+  k = 0, wmdim = 0.0
+  k = 1, wmdim = 3.0
+  k = 2, wmdim = 4.0
+  k = 3, wmdim = 7.0
+  k = 4, wmdim = 8.0
+- velikost: 4 : kappa = 8
+  k = 0, wmdim = 0.0
+  k = 1, wmdim = 4.0
+  k = 2, wmdim = 5.0
+  k = 3, wmdim = 7.0
+  k = 4, wmdim = 8.0
+  k = 5, wmdim = 11.0
+  k = 6, wmdim = 14.0
+  k = 7, wmdim = 15.0
+  k = 8, wmdim = 16.0
+```
+
 ### Kartezični produkti ciklov
 Pri kartezičnih produktih ciklov je za grafe s $k$-jem enakim $\kappa''(G)$ 
 
 $$wmdim_k(G) = m\cdot n.$$
 
 Za ostale $k$ nisva znala določiti splošne formule za $wmdim_k(G)$.
+
+```py
+Processing Cartesian Product of Cycles C_4 x C_4
+  Max k (kappa'') = 8
+    k=1: wmdim_k(C_4 x C_4) = 4.0
+    k=2: wmdim_k(C_4 x C_4) = 5.0
+    k=3: wmdim_k(C_4 x C_4) = 7.0
+    k=4: wmdim_k(C_4 x C_4) = 8.0
+    k=5: wmdim_k(C_4 x C_4) = 11.0
+    k=6: wmdim_k(C_4 x C_4) = 14.0
+    k=7: wmdim_k(C_4 x C_4) = 15.0
+    k=8: wmdim_k(C_4 x C_4) = 16.0
+
+Processing Cartesian Product of Cycles C_5 x C_6
+  Max k (kappa'') = 12
+    k=1: wmdim_k(C_5 x C_6) = 4.0
+    k=2: wmdim_k(C_5 x C_6) = 6.0
+    k=3: wmdim_k(C_5 x C_6) = 8.0
+    k=4: wmdim_k(C_5 x C_6) = 10.0
+    k=5: wmdim_k(C_5 x C_6) = 13.0
+    k=6: wmdim_k(C_5 x C_6) = 15.0
+    k=7: wmdim_k(C_5 x C_6) = 18.0
+    k=8: wmdim_k(C_5 x C_6) = 20.0
+    k=9: wmdim_k(C_5 x C_6) = 23.0
+    k=10: wmdim_k(C_5 x C_6) = 25.0
+    k=11: wmdim_k(C_5 x C_6) = 28.0
+    k=12: wmdim_k(C_5 x C_6) = 30.0
+
+Processing Cartesian Product of Cycles C_6 x C_6
+  Max k (kappa'') = 18
+    k=1: wmdim_k(C_6 x C_6) = 4.0
+    k=2: wmdim_k(C_6 x C_6) = 5.0
+    k=3: wmdim_k(C_6 x C_6) = 7.0
+    k=4: wmdim_k(C_6 x C_6) = 8.0
+    k=5: wmdim_k(C_6 x C_6) = 11.0
+    k=6: wmdim_k(C_6 x C_6) = 12.0
+    k=7: wmdim_k(C_6 x C_6) = 15.0
+    k=8: wmdim_k(C_6 x C_6) = 16.0
+    k=9: wmdim_k(C_6 x C_6) = 19.0
+    k=10: wmdim_k(C_6 x C_6) = 20.0
+    k=11: wmdim_k(C_6 x C_6) = 23.0
+    k=12: wmdim_k(C_6 x C_6) = 24.0
+    k=13: wmdim_k(C_6 x C_6) = 27.0
+    k=14: wmdim_k(C_6 x C_6) = 28.0
+    k=15: wmdim_k(C_6 x C_6) = 31.0
+    k=16: wmdim_k(C_6 x C_6) = 32.0
+    k=17: wmdim_k(C_6 x C_6) = 35.0
+    k=18: wmdim_k(C_6 x C_6) = 36.0
+```
 
 Če gledamo kartezični produkt ciklov $C_m$ in $C_n$, velikosti $m$ in $n$ pa je $\kappa''(G)$ definiran s pomočjo: 
 
@@ -124,6 +192,7 @@ def poisci_grafe_z_wmdim_k_n(od, do, n):
                 wmdim_k, _ = CLP_weak_k_dim(G, k)
                 if wmdim_k == n:
                     G.show()
+                    print(f'k = {k}')
 ```
 Funkcija `poisci_grafe_z_wmdim_k_n(od, do, n)` vrača grafe (slike) od velikosti `od` do vključno velikosti `do`.  Za vsakega od njih pri vsakem `k` preveri, ali je slučajno `wmdim_k == n` in če se to zgodi, ga vrne.
 
@@ -153,15 +222,17 @@ Grafov, ki imajo $wmdim_k(G) = 3$ je zelo veliko. Tukaj bi podala slike za grafe
 ## Grafi z velikim $wmdim_k(G)$
 Podobno kot za manjše $wmdim_k(G)$ sva napisala tudi funkcijo za večje, torej 
 ```py
-def poisci_grafe_z_wmdim_k_n_minus_k(od, do, k):
+def poisci_grafe_z_wmdim_k_n_minus_j(od, do, j):
     for i in range(od, do + 1):
-        print(f'Povezani grafi na {i} vozliscih z wmdim_k(G) = {i-k}:')
+        print(f'Povezani grafi na {i} vozliscih z wmdim_k(G) = {i-j}:')
         for G in graphs.nauty_geng(f'{i} -c'):
             kappa_2crti = kappa_2_crti(G)
             for k in range(1, kappa_2crti + 1):
-                wmdim_k, _ = CLP_weak_k_dim(G, k)
-                if wmdim_k == i - k:
+                wmdim_k, _ = CLP_weak_mixed_k_dim(G, k)
+                if wmdim_k == i - j:
                     G.show()
+                    print(G.adjacency_matrix())
+                    print(f'k = {k}')
 ```
 
 ### $wmdim_k(G) = n - 2$
@@ -292,7 +363,7 @@ Na začetku koda generira naključni povezani graf s pomočjo funkcije `generate
 
 Ciljna funkcija `objective` izračuna razdaljo med trenutno vrednostjo `wmdim_k` grafa in ciljno vrednostjo `target_wmdim_k`. Če izračun `wmdim_k` ni mogoč \(generiran graf je "preredek" za smiselno izračunavanje `wmdim_k` oziroma je parameter **k** prevelik glede na strukturo grafa\), funkcija vrne vrednost `None`.
 
-V glavnem delu koda `simulated_annealing` na vsakem koraku ustvari novo različico trenutnega grafa, na način, da z verjetnostjo 0.5 doda novo povezavo med naključnima vozliščema, v primeru da ta ne obstaja. Sicer pa odstrani naključno obstoječo povezavo, če graf pri tem procesu ostane povezan. Nato koda izračuna vrednost `wmdim_k` za posodobljeni graf z uporabo ciljne funkcije. Če ta vrne vrednost `None`, se vrednost `none_count` poveča za ena. Če pride do dvajset zaporednih ponovitev vrednosti `None`, se trenutni graf zamenja z novim naključno generiranim povezanim grafom. V primeru, da ciljna funkcija vrne vrednost, ki ji enaka `None` algoritem sprejme spremembo grafa, če se razlika med trenutno in ciljno vrednostjo zmanjša. Z določenim naključjem pa sprejme tudi "poslabšanje" grafa, s čimer se izognemo, da bi obtičali v lokalnih minimumih. Na vsakem koraku prav tako pride do zmanjšanja temperature s faktorjem `cooling_rate`. Nižja temperatura zmanjša verjetnost sprejetja "poslabšanja", kar vodi v stabilizacijo rešitve.
+V glavnem delu koda `simulated_annealing` na vsakem koraku ustvari novo različico trenutnega grafa, na način, da z verjetnostjo 0.5 doda novo povezavo med naključnima vozliščema, v primeru da ta ne obstaja. Sicer pa odstrani naključno obstoječo povezavo, če graf pri tem procesu ostane povezan. Nato koda izračuna vrednost `wmdim_k` za posodobljeni graf z uporabo ciljne funkcije. Če ta vrne vrednost `None`, se vrednost `none_count` poveča za ena. Če pride do dvajset zaporednih ponovitev vrednosti `None`, se trenutni graf zamenja z novim naključno generiranim povezanim grafom. V primeru, da ciljna funkcija vrne vrednost, ki ni enaka `None` algoritem sprejme spremembo grafa, če se razlika med trenutno in ciljno vrednostjo zmanjša. Z določenim naključjem pa sprejme tudi "poslabšanje" grafa, s čimer se izognemo, da bi obtičali v lokalnih minimumih. Na vsakem koraku prav tako pride do zmanjšanja temperature s faktorjem `cooling_rate`. Nižja temperatura zmanjša verjetnost sprejetja "poslabšanja", kar vodi v stabilizacijo rešitve.
 
 Algoritem se zaključi, ko doseže maksimalno število iteracij ali pa najde graf, katerega `wmdim_k` ustreza ciljni vrednosti. 
 
