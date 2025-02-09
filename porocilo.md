@@ -135,9 +135,9 @@ Rezultat tega so poti. Spodaj so prikazani nekateri rezultati.
 
 | ![Graf na petih volziščih](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2petvozl.png?raw=true "Slika 1") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2sestvozl.png?raw=true "Slika 2") |
 |-----------------------|-----------------------|
-|Slika 1: *Graf na petih vozliščih*| Slika 2: *Graf na šestih vozliščih*|
+|Slika 1: *Graf na petih vozliščih* (k = 1)| Slika 2: *Graf na šestih vozliščih* (k = 1)|
 | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2sedemvozl.png?raw=true "Slika 3") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm2osemvozl.png?raw=true "Slika 4") |
-| Slika 3: *Graf na sedmih vozliščih*| Slika 4: *Graf na osmih vozliščih*|
+| Slika 3: *Graf na sedmih vozliščih* (k = 1)| Slika 4: *Graf na osmih vozliščih* (k = 1)|
 
 ### $wmdim_k(G) = 3$
 Grafov, ki imajo $wmdim_k(G) = 3$ je zelo veliko. Tukaj bi podala slike za grafe na petih vozliščih. Grafi na več kot petih vozliščih se nahajajo v datoteki "**druga_naloga.ipynb**". Vidimo lahko, da se med rezultati pojavijo tako grafi z vsaj enim ciklom, kot tudi drevesa.
@@ -145,9 +145,9 @@ Grafov, ki imajo $wmdim_k(G) = 3$ je zelo veliko. Tukaj bi podala slike za grafe
 
 | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet1.png?raw=true "Slika 5") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet2.png?raw=true "Slika 6") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet3.png?raw=true "Slika 7") |
 |-----------------------|-----------------------|-----------------------|
-| Slika 5         | Slika 6          | Slika 7        |
+| Slika 5 (k = 1)        | Slika 6 (k = 1)         | Slika 7 (k = 1)       |
 | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet4.png?raw=true "Slika 8") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet5.png?raw=true "Slika 9") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wm3pet6.png?raw=true "Slika 10") |
-| Slika 8         | Slika 9          | Slika 10        |
+| Slika 8 (k = 1)        | Slika 9 (k = 1)         | Slika 10 (k = 1)       |
 
 
 ## Grafi z velikim $wmdim_k(G)$
@@ -170,9 +170,9 @@ Taki grafi imajo po veliki večini vsaj en cikel ali pa so drevesa z $n-1$ listi
 
 | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn2petvozl.png?raw=true "Slika 11") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn2sestvozl.png?raw=true "Slika 12") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn2sedmvozl.png?raw=true "Slika 13") |
 |-----------------------|-----------------------|-----------------------|
-| Slika 11         | Slika 12          | Slika 13        |
+| Slika 11 (k = 2)        | Slika 12 (k = 1)         | Slika 13 (k = 1)       |
 | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn2sedmvozl2.png?raw=true "Slika 14") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn2sedmvozl3.png?raw=true "Slika 15") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn2sedmvozl4.png?raw=true "Slika 16") |
-| Slika 14         | Slika 15          | Slika 16        |
+| Slika 14 (k = 1)        | Slika 15 (k = 1)         | Slika 16 (k = 1)       |
 
 Več rezultatov se nahaja v datoteki **druga_naloga2.ipynb**.
 
@@ -182,9 +182,9 @@ Podobno kot gor tudi tukaj dobimo grafe, ki imajo vsaj en cikel ali pa drevo z $
 
 | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn1petvozl1.png?raw=true "Slika 17") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn1petvozl2.png?raw=true "Slika 18") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn1sestvozl1.png?raw=true "Slika 19") |![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn1sestvozl2.png?raw=true "Slika 20")|  
 |-----------------------|-----------------------|-----------------------|-----------------------|
-| Slika 17         | Slika 18          | Slika 19        |Slika 20         | 
+| Slika 17 (k = 1)        | Slika 18 (k = 1)         | Slika 19 (k = 1)       |Slika 20 (k = 2)        | 
 | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn1sestvoz3.png?raw=true "Slika 21") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn1sedmvozl1.png?raw=true "Slika 22") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn1sedmvozl2.png?raw=true "Slika 23") |![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimn1osmvozl1.png?raw=true "Slika 24") |
-| Slika 21         | Slika 22          | Slika 23        |Slika 24          | 
+| Slika 21 (k = 1)        | Slika 22 (k = 1)         | Slika 23 (k = 1)       |Slika 24 (k = 1)         | 
 
 Več rezultatov se nahaja v datoteki **druga_naloga3.ipynb**.
 
@@ -193,11 +193,11 @@ Tudi tu dobimo grafe z vsaj enim ciklom ali pa drevesa z $n-1$ listi.
 
 | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimnpetvozl1.png?raw=true "Slika 25") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimnpetvozl2.png?raw=true "Slika 26") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimnsestvozl1.png?raw=true "Slika 27") |
 |-----------------------|-----------------------|-----------------------|
-| Slika 25         | Slika 26          | Slika 27        |
+| Slika 25 (k = 2)        | Slika 26 (k = 2)         | Slika 27 (k = 1)       |
 | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimnsestvozl2.png?raw=true "Slika 28") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimnsestvozl3.png?raw=true "Slika 29") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimnsedmvozl1.png?raw=true "Slika 30") |
-| Slika 28         | Slika 29          | Slika 30        |
+| Slika 28 (k = 1)        | Slika 29 (k = 1)         | Slika 30 (k = 1)       |
 | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimnsedmvozl2.png?raw=true "Slika 31") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimnsedmvozl3.png?raw=true "Slika 32") | ![Slika grafa](https://github.com/lanmedle/Weak-Mixed-kMetric-Dimension/blob/main/slike/wmdimnsedmvozl4.png?raw=true "Slika 33") |
-| Slika 31         | Slika 32          | Slika 33        |
+| Slika 31 (k = 1)        | Slika 32 (k = 4)         | Slika 33 (k = 3)       |
 
 Več rezultatov se nahaja v datoteki **druga_naloga4.ipynb**.
 
